@@ -42,7 +42,6 @@ const devConfig = {
             options: {
               modules: {
                 localIdentName: CSS_MODULE_LOCAL_IDENT_NAME,
-                auto: (resourcePath) => resourcePath.endsWith('.module.less'),
               },
             },
           },
