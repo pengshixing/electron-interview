@@ -14,6 +14,21 @@
         "loose": true,
         "lazy": true
       }
+    ],
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "generateScopedName": "[hash:base64:6]",
+        "autoResolveMultipleImports": true,
+        "webpackHotModuleReloading": true,
+        // 如果找不到 则抛出错误
+        "handleMissingStyleName": "throw",
+        "filetypes": {
+          ".less": {
+            "syntax": "postcss-less"
+          }
+        }
+      }
     ]
   ]
 }
