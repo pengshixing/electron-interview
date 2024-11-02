@@ -7,7 +7,7 @@
   "scripts": {
     "start:main": "webpack --config ./webpack/webpack.main.dev.js && electron ./dist/electron.js",
     "start:render": "webpack-dev-server --config ./webpack/webpack.render.dev.js",
-    "dev": "concurrently \"wait-on http://localhost:7001 && npm run start:main\" \"npm run start:render\""
+    "dev": "concurrently \"wait-on -t 3s && npm run start:main\" \"npm run start:render\""
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
