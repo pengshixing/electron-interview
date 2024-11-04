@@ -1,11 +1,11 @@
 /**
  * @description 所有弹窗组件集合
  * 方式一：
- * import MyModal from '@components/MyModal';
- * <MyModal.Confirm />
+ * import Modal from '@components/Modal';
+ * <Modal.Confirm />
  *
  * 方式二：
- * import { Confirm } from '@components/MyModal';
+ * import { Confirm } from '@components/Modal';
  * <Confirm />
  */
 import MyDialog from './Dialog';

@@ -10,8 +10,10 @@
     "dev": "concurrently \"wait-on -t 3s && npm run start:main\" \"npm run start:render\""
   },
   "dependencies": {
+    "@emotion/styled": "^11.13.0",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
+    "lodash": "^4.17.21",
     "react": "^18.3.0",
     "react-css-modules": "^4.7.11",
     "react-dom": "^18.3.0",
@@ -29,6 +31,7 @@
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.24.1",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.1",
+    "@types/lodash": "^4.17.13",
     "@types/react": "^18.3.0",
     "@types/react-css-modules": "^4.6.8",
     "@types/react-dom": "^18.3.0",
