@@ -6,15 +6,16 @@ import fs from 'fs/promises';
 import { app, BrowserWindow, globalShortcut, ipcMain, dialog } from 'electron';
 import type { ExportPdfResType } from './types';
 
-function isDev() {
-  // 👉 还记得我们配置中通过 webpack.DefinePlugin 定义的构建变量吗
-  return process.env.NODE_ENV === 'development';
-}
+
+const isEnvSet = 'ELECTRON_IS_DEV' in process.env;
+const getFromEnv = Number.parseInt(process.env.ELECTRON_IS_DEV!, 10) === 1;
+const isDev = isEnvSet ? getFromEnv : !app.isPackaged;
+
 
 const devLoadPath = `http://127.0.0.1:7001/`;
 
 function loadURL() {
-  if (isDev()) {
+  if (isDev) {
     return devLoadPath;
   }
   return `file://${path.join(__dirname, '../dist/index.html')}`;
@@ -62,7 +63,7 @@ function createWindow() {
   })
   mainWindow.webContents.on('did-start-navigation', (event) => {
     // 在运行时报错找不到页面
-    if (event.isMainFrame && !event.isSameDocument && isDev()) {
+    if (event.isMainFrame && !event.isSameDocument && isDev) {
       event.frame.executeJavaScript(`location.href='/'`)
     }
   });

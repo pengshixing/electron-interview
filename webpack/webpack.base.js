@@ -1,5 +1,5 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 const { CSS_MODULE_LOCAL_IDENT_NAME } = require('./constant');
 
 module.exports = {
@@ -18,40 +18,14 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-            plugins: [
-              [
-                '@dr.pogodin/react-css-modules',
-                {
-                  generateScopedName: CSS_MODULE_LOCAL_IDENT_NAME,
-                  autoResolveMultipleImports: true,
-                  webpackHotModuleReloading: true,
-                  handleMissingStyleName: 'throw',
-                  filetypes: {
-                    '.less': {
-                      syntax: 'postcss-less',
-                    },
-                  },
-                },
-              ],
-            ],
-          },
         },
-      },
-      {
-        test: /\.(jpg|png|jpeg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name]_[hash].[ext]',
-              outputPath: 'images/',
-            },
-          },
-        ],
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    // 用于打包后的主进程中正确获取__dirname
+    new webpack.DefinePlugin({
+      __dirname: '__dirname',
+    }),
+  ],
 };
