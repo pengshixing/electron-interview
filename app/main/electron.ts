@@ -11,11 +11,22 @@ function isDev() {
   return process.env.NODE_ENV === 'development';
 }
 
+const devLoadPath = `http://127.0.0.1:7001/`;
+
+function loadURL() {
+  if (isDev()) {
+    return devLoadPath;
+  }
+  return `file://${path.join(__dirname, '../dist/index.html')}`;
+}
+
 function createWindow() {
   // 创建浏览器窗口
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    minWidth: 1200,
+    minHeight: 800,
     webPreferences: {
       devTools: true,
       // 👇 nodeIntegration contextIsolation 配置之后才能调用node模块
@@ -23,13 +34,7 @@ function createWindow() {
       contextIsolation: false,
     },
   });
-
-  if (isDev()) {
-    // 👇 看到了吗，在开发环境下，我们加载的是运行在 7001 端口的 React
-    mainWindow.loadURL(`http://127.0.0.1:7001`);
-  } else {
-    mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
-  }
+  mainWindow.loadURL(loadURL());
   // 事件: 进入全屏模式
   mainWindow.on('enter-full-screen', () => {
     // 在窗口进入全屏模式时执行操作
@@ -40,6 +45,26 @@ function createWindow() {
   mainWindow.on('leave-full-screen', () => {
     // 在窗口离开全屏模式时执行操作
     console.log('离开全屏模式');
+  });
+
+  mainWindow.webContents.on('unresponsive', async () => {
+    // 运行时卡死
+    const { response } = await dialog.showMessageBox({
+      message: 'App X has become unresponsive',
+      title: 'Do you want to try forcefully reloading the app?',
+      buttons: ['OK', 'Cancel'],
+      cancelId: 1
+    })
+    if (response === 0) {
+      mainWindow.webContents.forcefullyCrashRenderer()
+      mainWindow.webContents.reload()
+    }
+  })
+  mainWindow.webContents.on('did-start-navigation', (event) => {
+    // 在运行时报错找不到页面
+    if (event.isMainFrame && !event.isSameDocument && isDev()) {
+      event.frame.executeJavaScript(`location.href='/'`)
+    }
   });
   return mainWindow;
 }
