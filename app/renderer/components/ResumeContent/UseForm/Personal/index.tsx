@@ -31,45 +31,45 @@ function Personal({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>姓 名 ：
+      <div className="text-sm">
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>姓 名 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('base', { ...base, username: e.target?.value || '' });
               }}
               value={base?.username || ''}
               placeholder="请输入姓名"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>籍 贯 ：
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>籍 贯 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('base', { ...base, hometown: e.target?.value || '' });
               }}
               value={base?.hometown || ''}
               placeholder="请输入籍贯"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning" style={{ opacity: 0 }}>
               *
             </span>
             爱 好 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               type="textarea"
               onChange={(e) => {
@@ -78,7 +78,7 @@ function Personal({ onClose }: IProps) {
               rows={5}
               value={hobby || ''}
               placeholder="你有什么特长爱好呢"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>

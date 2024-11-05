@@ -32,20 +32,20 @@ function Skill({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
+      <div className="text-sm">
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning" style={{ opacity: 0 }}>
               *
             </span>
             技 能 ：
           </div>
-          <div styleName="right">
-            <div styleName="action">
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center text-black text-opacity-60">
               {RecommendSkill.map((recommend) => {
                 return (
                   <div
-                    styleName="label"
+                    className="py-1 px-2 rounded-s mr-2 mb-3 cursor-pointer border border-solid hover:opacity-80"
                     key={recommend.uid}
                     style={{
                       color: recommend?.styles?.font,
@@ -70,9 +70,9 @@ function Skill({ onClose }: IProps) {
               rows={5}
               value={skill}
               placeholder="例如 Vue、React"
-              allowClear={true}
+              allowClear
             />
-            <div styleName="tips"> * 多个技能以 | 分割</div>
+            <div className="text-warning mt-2"> * 多个技能以 | 分割</div>
           </div>
         </div>
       </div>

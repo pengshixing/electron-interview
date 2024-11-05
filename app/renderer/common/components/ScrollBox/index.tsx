@@ -23,18 +23,14 @@ interface IProps {
    */
   onScrollTop?: (scrollTop: number) => void;
 }
-function ScrollBox({ children, maxHeight = 200, style = {}, innerStyle = {}, onScrollTop }: IProps) {
+function ScrollBox({ children, style = {}, innerStyle = {}, onScrollTop }: IProps) {
   function onScroll(e: any) {
     const _event = e.target || e.currentTarget;
     onScrollTop && onScrollTop(_event.scrollTop);
   }
-  const _style = { ...style };
-  if (maxHeight) {
-    _style.maxHeight = `${maxHeight}px`;
-  }
   return (
-    <div className="scroll-box-outer" style={_style} onScroll={onScroll}>
-      <div className="scroll-box-hidden" style={{ maxHeight }}>
+    <div className="scroll-box-outer" style={style} onScroll={onScroll}>
+      <div className="scroll-box-hidden">
         <div className="scroll-box-inter" style={innerStyle}>
           {children}
         </div>

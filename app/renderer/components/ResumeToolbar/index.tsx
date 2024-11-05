@@ -11,11 +11,11 @@ function ResumeToolbar() {
     setMaxHeight(height - 180);
   }, []);
   return (
-    <div styleName="slider">
-      <ScrollBox maxHeight={maxHeight}>
+    <div styleName="slider" className="w-full p-4 bg-white text-sm rounded-md">
+      <ScrollBox style={{ height: '70vh', maxHeight: '75vh' }}>
         <div styleName="modules">
-          <div styleName="title">
-            <span styleName="line" />
+          <div styleName="title" className="relative pl-3 mb-4">
+            <span styleName="line" className="absolute left-0 h-3.5" />
             全部模块
           </div>
           <div styleName="content">
@@ -30,11 +30,13 @@ function ResumeToolbar() {
                     });
                   }}
                 >
-                  <div styleName="info">
-                    <i styleName="icon" />
+                  <div styleName="info" className="flex">
+                    <i styleName="icon" className="w-4 h-4 mt-0.5 mr-2" />
                     <div styleName="text">
                       <div styleName="name">{toolbar.name}</div>
-                      <div styleName="summary">{toolbar.summary}</div>
+                      <div styleName="summary" className="truncate text-xs mt-1 break-keep">
+                        {toolbar.summary}
+                      </div>
                     </div>
                   </div>
                 </div>

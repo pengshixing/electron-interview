@@ -16,11 +16,11 @@ function ResumeAction(props: { exportHandle: () => void }) {
   };
 
   return (
-    <div styleName="actions">
-      <div styleName="back" onClick={onBack}>
+    <div className="flex items-center justify-between bg-white rounded-md p-3">
+      <div className="text-base cursor-pointer text-black text-opacity-60" onClick={onBack}>
         返回
       </div>
-      <Button size="middle" className="export-btn" onClick={onExport}>
+      <Button size="middle" className="!text-white !bg-base" onClick={onExport}>
         导出PDF
       </Button>
     </div>

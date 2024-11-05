@@ -91,7 +91,7 @@ export const ProjectComponentRightContent = styled.div`
 `;
 
 export const A4BoxWrap = styled.div`
-  width: 820px;
+  width: 100%;
   height: 1160px;
   background-color: #fff;
 `;

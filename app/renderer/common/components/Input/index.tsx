@@ -78,11 +78,11 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 }
 
 type Ref = React.ForwardedRef<{
-  focus: () => void,
-  blur: () => void,
-}>
+  focus: () => void;
+  blur: () => void;
+}>;
 
-const Input = forwardRef((props: InputProps, ref: Ref ) => {
+const Input = forwardRef((props: InputProps, ref: Ref) => {
   const {
     value,
     onChange,
@@ -99,15 +99,15 @@ const Input = forwardRef((props: InputProps, ref: Ref ) => {
     allowCount,
     style,
     bgTransparent = false,
-    type
-  } = props
+    type,
+  } = props;
 
-  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null)
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
   const [focus, setFocus] = useState(false);
-  const [inputValue, setInputValue] = useState<InputProps["value"]>('')
+  const [inputValue, setInputValue] = useState<InputProps['value']>('');
   useEffect(() => {
-    setInputValue(value)
-  }, [value])
+    setInputValue(value);
+  }, [value]);
 
   const focusHandle = () => {
     inputRef.current?.focus();
@@ -120,9 +120,9 @@ const Input = forwardRef((props: InputProps, ref: Ref ) => {
   useImperativeHandle(ref, () => {
     return {
       focus: focusHandle,
-      blur: blurHandle
-    }
-  })
+      blur: blurHandle,
+    };
+  });
 
   // 模拟change事件
   const actionChange = (e: any) => {
@@ -135,36 +135,36 @@ const Input = forwardRef((props: InputProps, ref: Ref ) => {
       event.currentTarget = target;
     }
     onChange?.(event);
-  }
+  };
   const onFocus = () => {
-    setFocus(true)
+    setFocus(true);
   };
 
   const onBlur = () => {
-    setFocus(false)
+    setFocus(false);
   };
 
   const onInput = (e: any) => {
-    setInputValue(e.target.value)
+    setInputValue(e.target.value);
     actionChange(e);
   };
 
   const onClear = (e: any) => {
-    setInputValue('')
+    setInputValue('');
     actionChange(e);
   };
 
   const renderBefore = useMemo(() => {
     return !!addonBefore && <div styleName="my-input-center">{addonBefore}</div>;
-  }, [addonBefore])
+  }, [addonBefore]);
 
   const renderAfter = useMemo(() => {
     return !!addonAfter && <div styleName="my-input-center">{addonAfter}</div>;
-  }, [addonAfter])
+  }, [addonAfter]);
 
   const renderClear = useMemo(() => {
     return !!allowClear && inputValue && <i styleName="my-input-clear" onClick={onClear} />;
-  }, [allowClear, inputValue])
+  }, [allowClear, inputValue]);
 
   const renderInput = () => {
     return (
@@ -184,7 +184,7 @@ const Input = forwardRef((props: InputProps, ref: Ref ) => {
         {renderClear}
       </div>
     );
-  }
+  };
   const renderTextarea = () => {
     const _rows = rows || 3;
     const text = inputValue;
@@ -219,7 +219,7 @@ const Input = forwardRef((props: InputProps, ref: Ref ) => {
         )}
       </div>
     );
-  }
+  };
 
   return (
     <div
@@ -235,6 +235,6 @@ const Input = forwardRef((props: InputProps, ref: Ref ) => {
       {renderAfter}
     </div>
   );
-})
+});
 
-export default Input
+export default Input;

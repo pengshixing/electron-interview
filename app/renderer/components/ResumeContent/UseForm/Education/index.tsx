@@ -31,57 +31,57 @@ function Education({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>学 校 ：
+      <div className="text-sm">
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>学 校 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('base', { ...base, school: e.target?.value || '' });
               }}
               value={base?.school || ''}
               placeholder="请输入贵校"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>专 业 ：
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>专 业 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('base', { ...base, major: e.target?.value || '' });
               }}
               value={base?.major || ''}
               placeholder="请输入专业"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>学 位 ：
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>学 位 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('base', { ...base, degree: e.target?.value || '' });
               }}
               value={base?.degree || ''}
               placeholder="学士？硕士？博士？"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>学 年 ：
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>学 年 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 const nextTime = {
@@ -92,10 +92,10 @@ function Education({ onClose }: IProps) {
               }}
               value={base?.onSchoolTime?.beginTime || ''}
               placeholder="2013.09.01"
-              allowClear={true}
+              allowClear
               style={{ width: 300 }}
             />
-            <span styleName="line">-</span>
+            <span className="mx-2 text-black text-opacity-60">-</span>
             <Input
               onChange={(e) => {
                 const nextTime = {
@@ -107,7 +107,7 @@ function Education({ onClose }: IProps) {
               value={base?.onSchoolTime?.endTime || ''}
               placeholder="2017.06.30"
               style={{ width: 300 }}
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>

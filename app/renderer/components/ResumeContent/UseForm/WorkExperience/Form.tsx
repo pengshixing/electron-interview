@@ -15,12 +15,12 @@ function Form({ isDisable, currentItem, onChangeCurrentItem }: IProps) {
   };
 
   return (
-    <div styleName="wrapper">
-      <div styleName="flex">
-        <div styleName="left">
-          <span styleName="require">*</span>公司 ：
+    <div className="text-sm">
+      <div className="flex mb-3">
+        <div className="w-20 mt-3 text-black text-opacity-60">
+          <span className="mr-1.5 text-warning">*</span>公司 ：
         </div>
-        <div styleName="right">
+        <div className="flex-1">
           <Input
             onChange={(e) => onChangeValue('title', e.target.value)}
             value={currentItem?.title}
@@ -30,11 +30,11 @@ function Form({ isDisable, currentItem, onChangeCurrentItem }: IProps) {
           />
         </div>
       </div>
-      <div styleName="flex">
-        <div styleName="left">
-          <span styleName="require">*</span>职 位 ：
+      <div className="flex mb-3">
+        <div className="w-20 mt-3 text-black text-opacity-60">
+          <span className="mr-1.5 text-warning">*</span>职 位 ：
         </div>
-        <div styleName="right">
+        <div className="flex-1">
           <Input
             onChange={(e) => onChangeValue('post', e.target.value)}
             value={currentItem?.post}
@@ -44,11 +44,11 @@ function Form({ isDisable, currentItem, onChangeCurrentItem }: IProps) {
           />
         </div>
       </div>
-      <div styleName="flex">
-        <div styleName="left">
-          <span styleName="require">*</span>时 间 ：
+      <div className="flex mb-3">
+        <div className="w-20 mt-3 text-black text-opacity-60">
+          <span className="mr-1.5 text-warning">*</span>时 间 ：
         </div>
-        <div styleName="right">
+        <div className="flex-1">
           <Input
             onChange={(e) => onChangeValue('beginTime', e.target.value)}
             value={currentItem?.beginTime}
@@ -57,7 +57,7 @@ function Form({ isDisable, currentItem, onChangeCurrentItem }: IProps) {
             style={{ width: 290 }}
             disabled={isDisable}
           />
-          <span styleName="line">-</span>
+          <span className="mx-2 text-black text-opacity-60">-</span>
           <Input
             onChange={(e) => onChangeValue('endTime', e.target.value)}
             value={currentItem?.endTime}
@@ -68,11 +68,11 @@ function Form({ isDisable, currentItem, onChangeCurrentItem }: IProps) {
           />
         </div>
       </div>
-      <div styleName="flex">
-        <div styleName="left">
-          <span styleName="require">*</span>内 容 ：
+      <div className="flex mb-3">
+        <div className="w-20 mt-3 text-black text-opacity-60">
+          <span className="mr-1.5 text-warning">*</span>内 容 ：
         </div>
-        <div styleName="right">
+        <div className="flex-1">
           <Input
             type="textarea"
             onChange={(e) => onChangeValue('content', e.target.value)}

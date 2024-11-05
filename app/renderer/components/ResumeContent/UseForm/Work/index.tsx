@@ -31,36 +31,36 @@ function Work({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>职 位 ：
+      <div className="text-sm">
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>职 位 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('work', { ...work, job: e.target.value });
               }}
               value={work?.job || ''}
               placeholder="求职岗位"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>城 市 ：
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>城 市 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('work', { ...work, city: e.target.value });
               }}
               value={work?.city || ''}
               placeholder="请输入意愿城市"
-              allowClear={true}
+              allowClear
             />
-            <div styleName="tips"> * 多个地点以｜分割</div>
+            <div className="text-warning mt-2"> * 多个地点以｜分割</div>
           </div>
         </div>
       </div>

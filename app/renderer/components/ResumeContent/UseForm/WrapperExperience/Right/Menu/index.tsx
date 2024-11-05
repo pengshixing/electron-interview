@@ -26,9 +26,9 @@ interface IProps {
 }
 function Menu({ currentItem, isEdit, onCancelEditValue, onSaveEditValue, onChangeEditStatus }: IProps) {
   return (
-    <div styleName="menu">
-      <div styleName="left">
-        <div styleName="title">{currentItem?.title}</div>
+    <div styleName="menu" className="flex items-center justify-between relative flex-1 h-16">
+      <div className="flex-1 pr-4">
+        <div className="truncate">{currentItem?.title}</div>
       </div>
       <div styleName="right">
         {isEdit && (

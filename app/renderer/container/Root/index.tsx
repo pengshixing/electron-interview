@@ -20,23 +20,23 @@ function Root() {
     }
   };
   return (
-    <div styleName="root">
-      <div styleName="container">
-        <img src={Logo} alt="" />
-        <div styleName="title">{appName}</div>
-        <div styleName="tips">一个模板简历制作平台, 让你的简历更加出众 ~</div>
-        <div styleName="action">
+    <div className="w-screen h-screen text-center bg-base">
+      <div className="w-full text-center text-white pt-24">
+        <img className="w-28 h-28" src={Logo} alt="" />
+        <div className="text-2xl">{appName}</div>
+        <div className="text-base mt-6">一个模板简历制作平台, 让你的简历更加出众 ~</div>
+        <div className="w-80 flex items-center justify-center mx-auto mt-6">
           {ROUTER_ENTRY.map((router) => {
             return (
-              <div key={router.key} styleName="item" onClick={() => onRouterToLink(router)}>
+              <div key={router.key} className="w-1/4 cursor-pointer" onClick={() => onRouterToLink(router)}>
                 {router.text}
               </div>
             );
           })}
         </div>
-        <div styleName="copyright">
-          <div styleName="footer">
-            <p styleName="copyright">
+        <div className="fixed bottom-0 w-full">
+          <div className="py-4">
+            <p className="w-full text-center opacity-60 text-sm">
               Copyright © 2024-{new Date().getFullYear()} All Rights Reserved. Copyright By pengshixing
             </p>
           </div>

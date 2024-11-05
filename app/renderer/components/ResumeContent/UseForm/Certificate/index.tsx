@@ -32,12 +32,12 @@ function Certificate({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>证 书 ：
+      <div className="text-sm">
+        <div className="mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>证 书 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               type="textarea"
               onChange={(e) => {
@@ -46,10 +46,10 @@ function Certificate({ onClose }: IProps) {
               rows={5}
               value={certificate?.join('|') || ''}
               placeholder="互联网+大赛一等奖|掘金大学骰王|互联网喝酒大赛进步奖"
-              allowClear={true}
+              allowClear
             />
 
-            <div styleName="tips"> * 多个证书以 | 分割</div>
+            <div className="text-warning mt-2">* 多个证书以 | 分割</div>
           </div>
         </div>
       </div>

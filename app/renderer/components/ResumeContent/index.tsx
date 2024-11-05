@@ -16,17 +16,10 @@ import SchoolExperience from './UseForm/SchoolExperience';
 import WorkExperience from './UseForm/WorkExperience';
 import useResumeModel, { type State } from '@src/store/resumeModel';
 
-const HEADER_ACTION_HEIGHT = 92;
-
 export const InterviewInfoContext = React.createContext<State>({} as State);
 
 function ResumeContent() {
   const store = useResumeModel();
-  const [maxHeight, setMaxHeight] = useState(600);
-  useEffect(() => {
-    const height = document.body.clientHeight;
-    setMaxHeight(height - HEADER_ACTION_HEIGHT);
-  }, []);
 
   const [formName, setFormName] = useState<keyof typeof RESUME_TOOLBAR_MAPS | ''>('');
   const [showFormModal, setShowFormModal] = useState(false);
@@ -69,7 +62,7 @@ function ResumeContent() {
   };
 
   return (
-    <ScrollBox maxHeight={maxHeight}>
+    <ScrollBox>
       <InterviewInfoContext.Provider value={store}>
         <UseTemplateList.TemplateOne />
       </InterviewInfoContext.Provider>

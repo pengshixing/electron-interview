@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.less';
-import MyScrollBox from '@src/common/components/ScrollBox';
+import ScrollBox from '@src/common/components/ScrollBox';
 
 interface IProps {
   children: React.ReactNode;
@@ -23,9 +23,9 @@ function Right({ children }: IProps) {
   };
   return (
     <>
-      <div styleName="header">{getChild()[0]}</div>
-      <div styleName="content">
-        <MyScrollBox maxHeight={360}>{getChild()[1]}</MyScrollBox>
+      <div className="h-16 px-3">{getChild()[0]}</div>
+      <div className="pt-6 px-3">
+        <ScrollBox>{getChild()[1]}</ScrollBox>
       </div>
     </>
   );

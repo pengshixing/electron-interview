@@ -21,14 +21,14 @@ const exportToStr = () => {
 
 function Resume() {
   return (
-    <div styleName="container">
-      <div styleName="header">
+    <div className="w-full h-screen flex flex-col bg-base">
+      <div className="w-7/10 h-16 pl-8 pt-4">
         <ResumeAction exportHandle={exportToStr} />
       </div>
-      <div styleName="content">
+      <div className="w-7/10 flex-1 overflow-hidden pt-4 pl-8">
         <ResumeContent />
       </div>
-      <div styleName="toolbar">
+      <div className="w-1/4 absolute top-3/20 right-2 rounded-md bg-white">
         <ResumeToolbar />
       </div>
     </div>

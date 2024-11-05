@@ -32,12 +32,12 @@ function Evaluation({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>评 价 ：
+      <div className="text-sm">
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>评 价 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               type="textarea"
               onChange={(e) => {
@@ -46,9 +46,9 @@ function Evaluation({ onClose }: IProps) {
               rows={5}
               value={evaluation || ''}
               placeholder="夸一夸自己有什么亮点"
-              allowClear={true}
+              allowClear
             />
-            <div styleName="tips"> * 可通过 | 分割</div>
+            <div className="text-warning mt-2 text-xs"> * 可通过 | 分割</div>
           </div>
         </div>
       </div>

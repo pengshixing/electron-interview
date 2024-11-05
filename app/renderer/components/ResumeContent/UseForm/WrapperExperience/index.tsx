@@ -189,8 +189,8 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   }, [children, currentItem, editModal?.status, onChangeCurrentItem]);
 
   return (
-    <div styleName="form">
-      <div styleName="left-box">
+    <div styleName="form" className="flex h-96 overflow-hidden">
+      <div className="relative w-60 border-0 border-r border-solid border-black border-opacity-10">
         <Left
           index={currentIndex}
           experienceList={experienceList}
@@ -199,7 +199,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
           onDelete={onDeleteItem}
         />
       </div>
-      <div styleName="right-box">
+      <div className="flex-1 h-full">
         {experienceList.length > 0 && (
           <Right>
             <Menu

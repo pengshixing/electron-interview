@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import './index.less';
-import MyButton from '@common/components/Button';
-import MyScrollBox from '@common/components/ScrollBox';
+import Button from '@common/components/Button';
+import ScrollBox from '@common/components/ScrollBox';
 import List, { IListProps } from './List';
 
 interface IProps extends IListProps {
@@ -13,30 +13,32 @@ interface IProps extends IListProps {
 
 function Left({ index, experienceList = [], onDelete, onAdd, onChange }: IProps) {
   return (
-    <div styleName="layout-left">
+    <>
       {experienceList.length > 0 && (
         <>
-          <MyScrollBox maxHeight={420}>
+          <ScrollBox>
             <List index={index} experienceList={experienceList} onChange={onChange} onDelete={onDelete} />
-          </MyScrollBox>
-          <div styleName="action">
-            <MyButton width={112} size="middle" onClick={onAdd}>
-              添加条目
-            </MyButton>
+            <div className="h-8"></div>
+          </ScrollBox>
+          <div
+            className="absolute bottom-0 w-full h-8 flex justify-center items-center bg-white border-0 border-t border-solid border-black border-opacity-10 cursor-pointer text-xs"
+            onClick={onAdd}
+          >
+            添加条目
           </div>
         </>
       )}
       {experienceList.length === 0 && (
-        <div styleName="empty">
-          <div styleName="empty-tips">还没有内容，快添加一下吧～</div>
-          <div styleName="empty-action">
-            <MyButton width={112} size="middle" onClick={onAdd}>
+        <div className="text-center">
+          <div className="text-black text-opacity-40 mt-32">还没有内容，快添加一下吧～</div>
+          <div className="mt-3">
+            <Button width={112} size="middle" onClick={onAdd}>
               添加条目
-            </MyButton>
+            </Button>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

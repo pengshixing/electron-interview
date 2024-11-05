@@ -31,70 +31,70 @@ function Contact({ onClose }: IProps) {
         },
       }}
     >
-      <div styleName="form">
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>电 话 ：
+      <div className="text-sm">
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>电 话 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('contact', { ...contact, phone: e.target.value });
               }}
               value={contact?.phone || ''}
               placeholder="请输入电话号码"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require">*</span>邮 箱 ：
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning">*</span>邮 箱 ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('contact', { ...contact, email: e.target.value });
               }}
               value={contact?.email || ''}
               placeholder="请输入邮箱"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning" style={{ opacity: 0 }}>
               *
             </span>
             Github ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('contact', { ...contact, github: e.target.value });
               }}
               value={contact?.github || ''}
               placeholder="Github 地址"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
+        <div className="flex mb-3">
+          <div className="w-20 mt-3 text-black text-opacity-60">
+            <span className="mr-1.5 text-warning" style={{ opacity: 0 }}>
               *
             </span>
             Juejin ：
           </div>
-          <div styleName="right">
+          <div className="flex-1">
             <Input
               onChange={(e) => {
                 updateStore('contact', { ...contact, juejin: e.target.value });
               }}
               value={contact?.juejin || ''}
               placeholder="掘金地址"
-              allowClear={true}
+              allowClear
             />
           </div>
         </div>
