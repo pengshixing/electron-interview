@@ -1,0 +1,39 @@
+name: Electron Build and Release
+
+on:
+  push:
+    branches:
+      - master
+    # 只在提交消息包含 "build" 时触发
+    if: "contains(github.event.head_commit.message, 'build')"
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      # 切换到master分支
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # nodejs18
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      # 下载依赖
+      - name: Install dependencies
+        run: npm install
+      # 开始打包
+      - name: Build Electron app
+        run: npm run build && npm run pack
+      # 发布到release
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          # 依据tag来发布
+          tag: 'v-0.0.1'
+          # 筛选出要发布的内容
+          artifacts: 'package/**/*.exe'
+          token: ${{ secrets.GITHUB_TOKEN }}
