@@ -11,8 +11,9 @@
     "dev": "concurrently \"wait-on -t 3s && npm run start:main\" \"npm run start:render\"",
     "build:main": "webpack --config ./webpack/webpack.main.prod.js",
     "build:render": "webpack --config ./webpack/webpack.render.dev.js",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder --win --x64",
+    "build-win": "electron-builder --win --x64",
+    "build-linux": "electron-builder --linux",
+    "build-mac": "electron-builder --mac",
     "build": "rm -rf dist package && npm run build:main && npm run build:render"
   },
   "build": {
