@@ -9,14 +9,17 @@ on:
 
 jobs:
   build-and-release:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: write
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      # 切换到master分支
+      # 切换到 master 分支
       - name: Checkout code
         uses: actions/checkout@v3
-      # nodejs18
+      # 设置 Node.js 环境为版本 18
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,14 +29,27 @@ jobs:
         run: npm install
       # 开始打包
       - name: Build Electron app
-        run: npm run build && npm run pack
-      # 发布到release
+        run: |
+          if [ ${{ matrix.os }} == "windows-latest" ]; then
+            npm run build && npm run build-win
+          elif [ ${{ matrix.os }} == "macos-latest" ]; then
+            npm run build && npm run build-mac
+          else
+            npm run build && npm run build-linux
+          fi
+        shell: bash
+      # 发布到 release
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          # 依据tag来发布
-          tag: 'v-0.0.1'
-          # 筛选出要发布的内容
-          artifacts: 'package/**/*.exe'
+          tag: 'v-0.0.3'
+          artifacts: |
+            if [ ${{ matrix.os }} == "windows-latest" ]; then
+              'package/win-unpacked/**'
+            elif [ ${{ matrix.os }} == "macos-latest" ]; then
+              'package/mac/**'
+            else
+              'package/linux/**'
+            fi
           token: ${{ secrets.GITHUB_TOKEN }}

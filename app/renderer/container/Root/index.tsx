@@ -1,6 +1,6 @@
 import React from 'react';
 import { shell } from 'electron';
-import Logo from '@assets/logo.png';
+import Logo from '@assets/logo-128x128.png';
 import { useNavigate } from 'react-router';
 import { ROUTER_ENTRY } from '@common/constants/router';
 import { isHttpOrHttpsUrl } from '@common/utils/router';
