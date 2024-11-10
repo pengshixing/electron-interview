@@ -52,4 +52,5 @@ jobs:
             else
               'package/linux/**'
             fi
-          token: ${{ secrets.GH_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
