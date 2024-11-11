@@ -19,11 +19,10 @@ jobs:
       # 切换到 master 分支
       - name: Checkout code
         uses: actions/checkout@v3
-      # 设置 Node.js 环境为版本 18
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "20"
       # 下载依赖
       - name: Install dependencies
         run: npm install
