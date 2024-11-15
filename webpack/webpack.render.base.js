@@ -31,6 +31,16 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
             plugins: [
+              '@babel/plugin-syntax-jsx',
+              '@babel/plugin-transform-runtime', // 👉 官方提供的插件，作用是减少冗余的代码
+              [
+                '@babel/plugin-transform-modules-commonjs', // 👉 将 ECMAScript modules 转成 CommonJS.
+                {
+                  allowTopLevelThis: true,
+                  loose: true,
+                  lazy: true,
+                },
+              ],
               [
                 '@dr.pogodin/react-css-modules',
                 {
@@ -53,8 +63,9 @@ module.exports = {
         test: /\.(jpg|png|jpeg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
+              limit: 2048,
               name: '[name]_[hash].[ext]',
               outputPath: 'images/',
             },
@@ -65,17 +76,11 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         include: /app/,
-        use: [
-          // MiniCssExtractPlugin.loader,
-          'style-loader', 
-          'css-loader', 
-          'postcss-loader'
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less$/,
         exclude: /node_modules/,
-        include: /app/,
         use: [
           'style-loader',
           {
@@ -87,17 +92,10 @@ module.exports = {
             },
           },
           'postcss-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                javascriptEnabled: true,
-              },
-            },
-          },
+          'less-loader',
         ],
       },
-    ]
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -110,7 +108,7 @@ module.exports = {
         {
           from: path.resolve(__dirname, '../assets'),
           to: path.resolve(__dirname, '../dist/assets'),
-        }
+        },
       ],
     }),
   ],

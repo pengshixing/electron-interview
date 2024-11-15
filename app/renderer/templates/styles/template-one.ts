@@ -26,15 +26,13 @@ export const AvatarBox = styled.div`
   height: 100%;
 `;
 export const AvatarImgWrap = styled.div`
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   & > img {
-    position: absolute;
-    top: 14px;
-    left: 55px;
     width: 112px;
     height: 152px;
-    z-index: 1;
   }
 `;
 

@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const { CSS_MODULE_LOCAL_IDENT_NAME } = require('./constant');
 
 module.exports = {
   resolve: {

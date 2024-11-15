@@ -62,7 +62,7 @@ class ParentComponent extends React.Component<IProps> {
     const { style } = this.props;
     let finialStyle = this.getParentStyle();
     return (
-      <div className="parent-box" style={{ ...finialStyle, ...style }}>
+      <div className="parent-box mx-auto relative" style={{ ...finialStyle, ...style }}>
         {this.getChild()}
       </div>
     );

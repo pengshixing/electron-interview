@@ -11,9 +11,9 @@ interface IProps {
 
 class RightComponent extends React.PureComponent<IProps> {
   render() {
-    const { key = 'componentRight', style = {}, children } = this.props;
+    const { style = {}, children } = this.props;
     return (
-      <div key={key} className="right-box" style={style}>
+      <div className="right-box" style={style}>
         {children}
       </div>
     );
