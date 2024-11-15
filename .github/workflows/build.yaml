@@ -44,7 +44,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          tag: 'v-0.0.2'
+          tag: 'v-0.0.3'
           artifacts: |
             ${{ matrix.os == 'windows-latest' && 'package/win-unpacked/*.exe' || matrix.os == 'macos-latest' && 'package/**/*.dmg' || 'package/**/*.AppImage' }}
           token: ${{ secrets.GITHUB_TOKEN }}
