@@ -38,6 +38,7 @@ jobs:
           else
             npm run build && npm run build-linux
           fi
+        shell: bash
       # 发布到 release
       - name: Create release
         uses: ncipollo/release-action@v1
