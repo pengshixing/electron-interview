@@ -44,17 +44,6 @@ jobs:
         with:
           allowUpdates: true
           tag: 'v-0.0.1'
-          artifacts: >-
-            ${{
-              steps:
-                - name: SetArtifactPath
-                  run: |
-                    if [ "${{ matrix.os }}" == "windows-latest" ]; then
-                      echo "package/win-unpacked/**"
-                    elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-                      echo "package/mac/**"
-                    else
-                      echo "package/linux/**"
-                    fi
-            }}
+          artifacts: |
+            ${{ matrix.os == 'windows-latest' && 'package/win-unpacked/**' || matrix.os == 'macos-latest' && 'package/mac/**' || 'package/linux/**' }}
           token: ${{ secrets.GITHUB_TOKEN }}
