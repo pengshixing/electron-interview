@@ -18,7 +18,7 @@
     [
       "@dr.pogodin/react-css-modules",
       {
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": "[path]__[local]___[hash:base64:5]",
         "autoResolveMultipleImports": true,
         "webpackHotModuleReloading": true,
         // 如果找不到 则抛出错误
