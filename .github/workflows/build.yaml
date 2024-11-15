@@ -46,5 +46,5 @@ jobs:
           allowUpdates: true
           tag: 'v-0.0.2'
           artifacts: |
-            ${{ matrix.os == 'windows-latest' && 'package/win-unpacked/*.exe' || matrix.os == 'macos-latest' && 'package/**/*.dmg' || 'package/**/*.AppImage' }}
+            ${{ matrix.os == 'windows-latest' && 'package/win-unpacked/*.exe' || matrix.os == 'macos-latest' && 'package/**/*.dmg' || 'package/**/*.AppImage'|| 'package/**/*.deb' }}
           token: ${{ secrets.GITHUB_TOKEN }}
