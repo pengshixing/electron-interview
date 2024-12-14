@@ -12,6 +12,7 @@ module.exports = {
   content: ['./app/renderer/**/*.{tsx,ts}'],
   corePlugins: {
     preflight: false, // 禁用tailwind的预设样式
+    container: false,
   },
   theme: {
     colors: {

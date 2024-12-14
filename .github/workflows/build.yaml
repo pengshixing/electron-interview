@@ -2,49 +2,96 @@ name: Electron Build and Release
 
 on:
   push:
-    branches:
-      - main
-    # 只在提交消息包含 "build" 时触发
+    branches: [main]
+    # Only trigger when commit message contains "build"
     if: contains(github.event.head_commit.message, 'build')
+  # Optional: Add manual trigger
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+        default: 'v-0.0.1'
+
+env:
+  NODE_VERSION: '20'
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build-and-release:
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
+    
     strategy:
+      fail-fast: false  # Continue with other builds if one fails
       matrix:
-        os: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: windows-latest
+            build-command: build-win
+            artifact-path: 'package/win-unpacked/*.exe'
+          - os: macos-latest
+            build-command: build-mac
+            artifact-path: 'package/mac/*.dmg'
+          - os: ubuntu-latest
+            build-command: build-linux
+            artifact-path: 'package/linux/*.AppImage'
+
     steps:
-      # 切换到 master 分支
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up Node.js
+        with:
+          fetch-depth: 0  # Fetch all history for proper versioning
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      # 下载依赖
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'  # Enable npm caching
+
       - name: Install dependencies
-        run: npm install
-      # 开始打包
-      - name: Build Electron app
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ "${{ matrix.os }}" == 'windows-latest' ]; then
-            npm run build && npm run build-win
-          elif [ "${{ matrix.os }}" == 'macos-latest' ]; then
-            npm run build && npm run build-mac
-          else
-            npm run build && npm run build-linux
-          fi
+          npm ci  # More reliable than npm install for CI environments
+        
+      - name: Build Electron app
+        run: |
+          npm run build
+          npm run ${{ matrix.build-command }}
         shell: bash
-      # 发布到 release
+
+      # Cache build artifacts
+      - name: Cache build artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            package/
+            dist/
+          key: ${{ runner.os }}-build-${{ github.sha }}
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          tag: 'v-0.0.3'
-          artifacts: |
-            ${{ matrix.os == 'windows-latest' && 'package/win-unpacked/*.exe' || matrix.os == 'macos-latest' && 'package/**/*.dmg' || 'package/**/*.AppImage' }}
+          tag: ${{ github.event.inputs.version || 'v-0.0.1' }}
+          name: Release ${{ github.event.inputs.version || 'v-0.0.1' }}
+          body: |
+            ## What's Changed
+            ${{ github.event.head_commit.message }}
+            
+            ## Build Information
+            - OS: ${{ matrix.os }}
+            - Node Version: ${{ env.NODE_VERSION }}
+            - Commit: ${{ github.sha }}
+          artifacts: ${{ matrix.artifact-path }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
+
+      # Optional: Cleanup cache
+      - name: Cleanup
+        if: always()
+        run: |
+          npm cache clean --force
+          rm -rf node_modules
+        shell: bash
