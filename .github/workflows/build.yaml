@@ -67,12 +67,23 @@ jobs:
             dist/
           key: ${{ runner.os }}-build-${{ github.sha }}
 
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v-0.0.1")
+          # Increment the patch version
+          current_version=${latest_tag#v-}  # Remove 'v-' prefix
+          IFS='.' read -r major minor patch <<< "$current_version"
+          new_version="v-$major.$minor.$((patch + 1))"
+          echo "new_tag=$new_version" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          tag: ${{ github.event.inputs.version || 'v-0.0.1' }}
-          name: Release ${{ github.event.inputs.version || 'v-0.0.1' }}
+          tag: ${{ steps.get_latest_tag.outputs.new_tag }}
+          name: Release ${{ steps.get_latest_tag.outputs.new_tag }}
           body: |
             ## What's Changed
             ${{ github.event.head_commit.message }}
