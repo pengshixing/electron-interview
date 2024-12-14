@@ -3,9 +3,6 @@ name: Electron Build and Release
 on:
   push:
     branches: [main]
-    # Only trigger when commit message contains "build"
-    if: contains(github.event.head_commit.message, 'build')
-  # Optional: Add manual trigger
   workflow_dispatch:
     inputs:
       version:
@@ -19,6 +16,7 @@ env:
 
 jobs:
   build-and-release:
+    if: contains(github.event.head_commit.message, 'build')
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
